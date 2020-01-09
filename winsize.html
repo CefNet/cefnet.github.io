@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>winsize</title>
+		<!--meta name="viewport" content="width=device-width"/-->
+	</head>
+	<body style="min-height: 2000px" onclick="document.getElementById('mouse').innerHTML = '(' + event.screenX + ',' + event.screenY + ')'">
+		<select>
+			<option>value 1</option>
+			<option>value 2</option>
+			<option>value 3</option>
+			<option>value 4</option>
+		</select>
+		<button onclick="writeWindowInfo()">Run one</button>
+		<button onclick="setInterval(writeWindowInfo, 1000)">Run cycle</button>
+		<button onclick="window.close()">Close</button>
+		<button onclick="alert('value = ' + prompt('value'))">Alert & Prompt</button>
+		<input type="file" />
+		<br /><br />
+		<div id="mouse" style="font-size: 2em"></div>
+		<div id="log" style="font-size: 2em"></div>
+		<script type="text/javascript">
+				function writeWindowInfo() {
+					var renderer = '';
+					try {
+						var canvas = document.createElement("canvas");
+						if (canvas) {
+							var context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+							if (context) {
+								var info = context.getExtension("WEBGL_debug_renderer_info");
+								if (info) {
+									renderer = context.getParameter(info.UNMASKED_RENDERER_WEBGL);
+								}
+							}
+						}
+					} catch (e) { }
+
+
+
+						var client = {
+							sw: screen.width,
+							sh: screen.height,
+							//saw: screen.availWidth,
+							//sah: screen.availHeight,
+							//pd: screen.pixelDepth,
+							//cd: screen.colorDepth,
+							iw: window.innerWidth,
+							ih: window.innerHeight,
+							//ow: window.outerWidth,
+							//oh: window.outerHeight,
+							//sx: window.screenX,
+							//sy: window.screenY,
+							//cl: document.documentElement.clientLeft,
+							//ct: document.documentElement.clientTop,
+							//cw: document.documentElement.clientWidth,
+							//ch: document.documentElement.clientHeight,
+							dpr: window.devicePixelRatio
+							//renderer: renderer
+						};
+
+					document.querySelector('#log').innerHTML += JSON.stringify(client) + '<br/>';
+				}
+				writeWindowInfo();
+		</script>
+
+	</body>
+</html>
