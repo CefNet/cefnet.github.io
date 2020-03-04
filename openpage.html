@@ -3,46 +3,48 @@
 <head>
 </head>
 <body>
-<div style="height:1000px">
-<br/>
-<div><a href="http://example.com" target="_blank">example blank</a></div>
-<div><a href="" target="_blank">example blank</a></div>
-<br/>
-<form id="f" action="https://postman-echo.com/post" method="post" target="_blank">
-	<input type="hidden" name="time" value="<?=time()?>"/>
-	<input type="submit" name="submit2" value="submit" />
-</form>
-<br/>
-<br/>
-<button onclick="document.getElementById('f').submit()">form.submit()</button>
-<br/>
-<button onclick="document.cookie = 'a=1'">set cookie</button> <?=isset($_COOKIE['a']) ? 'a = '. htmlentities($_COOKIE['a']) : ''?>
-<br/>
-<button onclick="var socket = new WebSocket('ws://javascript.ru/ws');">websocket</button>
-<br/>
-<br/>
-<strong>User-Agent:</strong> <?=htmlentities($_SERVER['HTTP_USER_AGENT'], ENT_COMPAT,'utf-8')?><br/>
-<strong>navigator.userAgent:</strong> <span id="ua"></span><br/>
-<strong>Referrer:</strong> <?=htmlentities(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '', ENT_COMPAT,'utf-8')?><br/>
-<br/>
-<script type="text/javascript">
-/*
-window.addEventListener('submit', function(e) {
-	e.srcElement.target = '_self';
-});
-var osubmit = HTMLFormElement.prototype.submit;
+	<div style="height:1000px">
+		<br />
+		<div><a href="http://example.com" target="_blank">example blank</a></div>
+		<div><a href="" target="_blank">example blank</a></div>
+		<br />
+		<form id="f" action="https://postman-echo.com/post" method="post" target="_blank">
+			<input type="hidden" name="time" value="<?=time()?>" />
+			<input type="submit" name="submit2" value="submit" />
+		</form>
+		<br />
+		<br />
+		<button onclick="window.open('http://example.com')">window.open()</button>
+		<br />
+		<button onclick="document.getElementById('f').submit()">form.submit()</button>
+		<br />
+		<button onclick="document.cookie = 'a=1'">set cookie</button> <?=isset($_COOKIE['a']) ? 'a = '. htmlentities($_COOKIE['a']) : ''?>
+		<br />
+		<button onclick="var socket = new WebSocket('ws://javascript.ru/ws');">websocket</button>
+		<br />
+		<br />
+		<strong>User-Agent:</strong> <?=htmlentities($_SERVER['HTTP_USER_AGENT'], ENT_COMPAT,'utf-8')?><br />
+		<strong>navigator.userAgent:</strong> <span id="ua"></span><br />
+		<strong>Referrer:</strong> <?=htmlentities(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '', ENT_COMPAT,'utf-8')?><br />
+		<br />
+		<script type="text/javascript">
+			/*
+			window.addEventListener('submit', function(e) {
+				e.srcElement.target = '_self';
+			});
+			var osubmit = HTMLFormElement.prototype.submit;
 
-HTMLFormElement.prototype.submit = function() {
-	this.target = '_self';
-	//var args = Array.prototype.slice.call(arguments);
-	osubmit.apply(this, arguments);
-}
-*/
-document.getElementById('ua').textContent = navigator.userAgent;
-</script>
-</div>
+			HTMLFormElement.prototype.submit = function() {
+				this.target = '_self';
+				//var args = Array.prototype.slice.call(arguments);
+				osubmit.apply(this, arguments);
+			}
+			*/
+			document.getElementById('ua').textContent = navigator.userAgent;
+		</script>
+	</div>
 
-<div><?=time()?></div>
+	<div><?=time()?></div>
 
 </body>
 </html>
