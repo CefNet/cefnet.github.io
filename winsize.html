@@ -4,7 +4,7 @@
 		<title>winsize</title>
 		<!--meta name="viewport" content="width=device-width"/-->
 	</head>
-	<body style="min-height: 2000px" onclick="document.getElementById('mouse').innerHTML = '(' + event.screenX + ',' + event.screenY + ')'">
+	<body style="min-height: 2000px" onclick="document.getElementById('mouse').innerHTML = 'clickXY: (' + event.screenX + ',' + event.screenY + ')'">
 		<select>
 			<option>value 1</option>
 			<option>value 2</option>
@@ -17,50 +17,59 @@
 		<button onclick="alert('value = ' + prompt('value'))">Alert & Prompt</button>
 		<input type="file" />
 		<br /><br />
-		<div id="mouse" style="font-size: 2em"></div>
+		<div id="mouse" style="font-size: 2em">clickXY: (0,0)</div>
+		<div id="screenXY" style="font-size: 2em">screenXY: (0,0)</div>
 		<div id="log" style="font-size: 2em"></div>
 		<script type="text/javascript">
-				function writeWindowInfo() {
-					var renderer = '';
-					try {
-						var canvas = document.createElement("canvas");
-						if (canvas) {
-							var context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-							if (context) {
-								var info = context.getExtension("WEBGL_debug_renderer_info");
-								if (info) {
-									renderer = context.getParameter(info.UNMASKED_RENDERER_WEBGL);
-								}
+			function writeWindowInfo() {
+				var renderer = '';
+				try {
+					var canvas = document.createElement("canvas");
+					if (canvas) {
+						var context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+						if (context) {
+							var info = context.getExtension("WEBGL_debug_renderer_info");
+							if (info) {
+								renderer = context.getParameter(info.UNMASKED_RENDERER_WEBGL);
 							}
 						}
-					} catch (e) { }
+					}
+				} catch (e) { }
 
 
 
-						var client = {
-							sw: screen.width,
-							sh: screen.height,
-							//saw: screen.availWidth,
-							//sah: screen.availHeight,
-							//pd: screen.pixelDepth,
-							//cd: screen.colorDepth,
-							iw: window.innerWidth,
-							ih: window.innerHeight,
-							//ow: window.outerWidth,
-							//oh: window.outerHeight,
-							//sx: window.screenX,
-							//sy: window.screenY,
-							//cl: document.documentElement.clientLeft,
-							//ct: document.documentElement.clientTop,
-							//cw: document.documentElement.clientWidth,
-							//ch: document.documentElement.clientHeight,
-							dpr: window.devicePixelRatio
-							//renderer: renderer
-						};
+				var client = {
+					sw: screen.width,
+					sh: screen.height,
+					//saw: screen.availWidth,
+					//sah: screen.availHeight,
+					//pd: screen.pixelDepth,
+					//cd: screen.colorDepth,
+					iw: window.innerWidth,
+					ih: window.innerHeight,
+					//ow: window.outerWidth,
+					//oh: window.outerHeight,
+					//sx: window.screenX,
+					//sy: window.screenY,
+					//cl: document.documentElement.clientLeft,
+					//ct: document.documentElement.clientTop,
+					//cw: document.documentElement.clientWidth,
+					//ch: document.documentElement.clientHeight,
+					dpr: window.devicePixelRatio
+					//renderer: renderer
+				};
 
-					document.querySelector('#log').innerHTML += JSON.stringify(client) + '<br/>';
+				document.querySelector('#log').innerHTML += JSON.stringify(client) + '<br/>';
+			}
+			function screenXY() {
+				var el = document.getElementById('screenXY'),
+					s = 'screenXY: (' + screenX + ',' + screenY + ')';
+				if (el.textContent != s) {
+					el.textContent = s;
 				}
-				writeWindowInfo();
+			}
+			setInterval(screenXY, 100);
+			writeWindowInfo();
 		</script>
 
 	</body>
